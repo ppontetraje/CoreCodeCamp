@@ -2,6 +2,7 @@
 using CoreCodeCamp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
@@ -17,6 +18,12 @@ namespace CoreCodeCamp
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddControllers();
+
+            services.AddApiVersioning(opt =>
+            {
+                opt.DefaultApiVersion = new ApiVersion(1, 1);
+                opt.ReportApiVersions = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
